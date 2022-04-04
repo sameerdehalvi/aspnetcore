@@ -1,6 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace MvcSandbox;
 
 public class Startup
@@ -8,6 +10,8 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddOutputCaching();
+        //services.AddResponseCaching();
         services.AddControllersWithViews();
         services.AddRazorPages();
     }
@@ -19,6 +23,10 @@ public class Startup
         app.UseStaticFiles();
 
         app.UseRouting();
+
+        app.UseOutputCaching();
+        //app.UseResponseCaching();
+
         app.UseEndpoints(builder =>
         {
             builder.MapControllers();
