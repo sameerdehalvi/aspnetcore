@@ -18,7 +18,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         private readonly bool _showErrorDetails;
         private readonly bool _enableLineFeedTerminator;
 
-        public HttpParser() : this(showErrorDetails: true, enableLineFeedTerminator: true)
+        public HttpParser() : this(showErrorDetails: true, enableLineFeedTerminator: false)
         {
         }
 
