@@ -197,7 +197,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                     else if (reader.TryRead(out ch1)) // Possibly split across spans
                     {
                         // Note if we read ahead by 1 or 2 bytes
-                        readAhead = (reader.TryRead(out ch2)) ? 2 : 1;
+                        readAhead = reader.TryRead(out ch2) ? 2 : 1;
                     }
 
                     if (ch1 == ByteCR)
@@ -388,8 +388,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                         // Not parsable as a valid name:value header pair.
                         RejectRequestHeader(headerSpan);
                     }
-
-                    return headerSpan.Length;
+                    
+                    // Omit last byte since the header is a valid LF terminated line
+                    return headerSpan.Length - 1;
                 }
             }
 

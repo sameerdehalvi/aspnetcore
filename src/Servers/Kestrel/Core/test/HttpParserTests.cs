@@ -655,11 +655,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Assert.Equal(StatusCodes.Status400BadRequest, exception.StatusCode);
         }        
 
-        [Fact]
-        public void ParseHeadersWithGratuitouslySplitBuffers()
+        [Theory]
+        [InlineData("Host:\r\nConnection: keep-alive\r\n\r\n")]
+        [InlineData("A:B\r\nB: C\r\n\r\n")]
+        public void ParseHeadersWithGratuitouslySplitBuffers(string headers)
         {
             var parser = CreateParser(_nullTrace);
-            var buffer = BytePerSegmentTestSequenceFactory.Instance.CreateWithContent("Host:\r\nConnection: keep-alive\r\n\r\n");
+            var buffer = BytePerSegmentTestSequenceFactory.Instance.CreateWithContent(headers);
 
             var requestHandler = new RequestHandler();
             var reader = new SequenceReader<byte>(buffer);
@@ -668,11 +670,21 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Assert.True(result);
         }
 
-        [Fact]
-        public void ParseHeadersWithGratuitouslySplitBuffers2()
+        [Theory]
+        [InlineData("Host:\nConnection: keep-alive\r\n\r\n")]
+        [InlineData("Host:\r\nConnection: keep-alive\n\r\n")]
+        [InlineData("A:B\nB: C\r\n\r\n")]
+        [InlineData("A:B\r\nB: C\n\r\n")]
+        public void ParseHeadersWithGratuitouslySplitBuffersQuirkMode(string headers)
         {
+            // Skip test when quirk mode is not enabled
+            if (!_enableLineFeedTerminator)
+            {
+                return;
+            }
+            
             var parser = CreateParser(_nullTrace);
-            var buffer = BytePerSegmentTestSequenceFactory.Instance.CreateWithContent("A:B\r\nB: C\r\n\r\n");
+            var buffer = BytePerSegmentTestSequenceFactory.Instance.CreateWithContent(headers);
 
             var requestHandler = new RequestHandler();
             var reader = new SequenceReader<byte>(buffer);
@@ -680,7 +692,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             Assert.True(result);
         }
-
 
         private bool ParseRequestLine(IHttpParser<RequestHandler> parser, RequestHandler requestHandler, ReadOnlySequence<byte> readableBuffer, out SequencePosition consumed, out SequencePosition examined)
         {
