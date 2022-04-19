@@ -389,9 +389,6 @@ namespace Microsoft.AspNetCore.Testing
             new[] { "Header: value\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header: value\x0A") },
             new[] { "Header-1: value1\nHeader-2: value2\r\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-1: value1\x0A") },
             new[] { "Header-1: value1\r\nHeader-2: value2\n\r\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"Header-2: value2\x0A") },
-
-            // Missing colon
-            // new[] { "\n", CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(@"\x0A") },
         };
 
         public static IEnumerable<object[]> RequestHeaderInvalidData => new[]
