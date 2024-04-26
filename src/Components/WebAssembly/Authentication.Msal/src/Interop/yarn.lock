@@ -2,19 +2,17 @@
 # yarn lockfile v1
 
 
-"@azure/msal-browser@^2.16.1":
-  version "2.16.1"
-  resolved "https://registry.yarnpkg.com/@azure/msal-browser/-/msal-browser-2.16.1.tgz#4b41afc1654eb27e090892893a2a2600af589af7"
-  integrity sha512-PcYi4seUGdtu30mOIdwk4FvbOdHFQ+fKAptEqV0tcsrvor0Hox/R0Xr0GEiBMfKkJbagLOYX7ORPRCYhZrWeqw==
+"@azure/msal-browser@^2.38.4":
+  version "2.38.4"
+  resolved "https://registry.yarnpkg.com/@azure/msal-browser/-/msal-browser-2.38.4.tgz#d8a04f6f164b7d59373f99fa6977578d796b4d28"
+  integrity sha512-d1qSanWO9fRKurrxhiyMOIj2jMoGw+2pHb51l2PXNwref7xQO+UeOP2q++5xfHQoUmgTtNuERhitynHla+dvhQ==
   dependencies:
-    "@azure/msal-common" "^4.5.1"
+    "@azure/msal-common" "13.3.1"
 
-"@azure/msal-common@^4.5.1":
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/@azure/msal-common/-/msal-common-4.5.1.tgz#f35af8b634ae24aebd0906deb237c0db1afa5826"
-  integrity sha512-/i5dXM+QAtO+6atYd5oHGBAx48EGSISkXNXViheliOQe+SIFMDo3gSq3lL54W0suOSAsVPws3XnTaIHlla0PIQ==
-  dependencies:
-    debug "^4.1.1"
+"@azure/msal-common@13.3.1":
+  version "13.3.1"
+  resolved "https://registry.yarnpkg.com/@azure/msal-common/-/msal-common-13.3.1.tgz#012465bf940d12375dc47387b754ccf9d6b92180"
+  integrity sha512-Lrk1ozoAtaP/cp53May3v6HtcFSVxdFrg2Pa/1xu5oIvsIwhxW6zSPibKefCOVgd5osgykMi5jjcZHv8XkzZEQ==
 
 "@babel/code-frame@7.12.11":
   version "7.12.11"
